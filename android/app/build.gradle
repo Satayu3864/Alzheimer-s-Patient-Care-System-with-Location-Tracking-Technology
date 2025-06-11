@@ -1,0 +1,52 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
+}
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services' // เพิ่มบรรทัดนี้
+
+android {
+    namespace = "com.example.testcode"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17 // ใช้ Java 17 แทน Java 21
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        applicationId = "com.example.testcode"
+        minSdkVersion 21
+        targetSdkVersion 35 // ✅ เปลี่ยนเป็น 35
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+// ใช้ Firebase plugin ที่นี่
+apply plugin: 'com.google.gms.google-services'
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-auth:21.2.0'
+    implementation 'com.google.firebase:firebase-firestore:24.2.0'
+    implementation platform('com.google.firebase:firebase-bom:31.1.0')
+    implementation 'io.flutter:flutter_embedding:2.8.0'  // เพิ่มถ้าคุณใช้ Flutter embedding
+}

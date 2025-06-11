@@ -1,0 +1,71 @@
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="ระบบติดตามผู้ป่วยอัลไซเมอร์">
+  <link rel="apple-touch-icon" href="sticker.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="sticker.jpg"/>
+
+  <title>ระบบติดตามผู้ป่วยอัลไซเมอร์</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- ✅ เพิ่ม js.cookie -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+</head>
+<body>
+<!-- Add Firebase SDK Scripts -->
+<script src="flutter_bootstrap.js" async></script>
+
+<!-- Firebase Scripts -->
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-messaging.js"></script>
+
+<script>
+  // กำหนดค่า Firebase สำหรับเว็บของคุณ
+  var firebaseConfig = {
+    apiKey: "AIzaSyBinULhaoZsGBJ1BRyg3yxm0kUR9b5Y3wA",
+    authDomain: "testcode-ec713.firebaseapp.com",
+    databaseURL: "https://testcode-ec713-default-rtdb.firebaseio.com",
+    projectId: "testcode-ec713",
+    storageBucket: "testcode-ec713.firebasestorage.app",
+    messagingSenderId: "669729897073",
+    appId: "1:669729897073:web:7f09e6f88a86230db639d0",
+    measurementId: "G-QT21GZXE11"
+  };
+
+  // เริ่มต้น Firebase
+  firebase.initializeApp(firebaseConfig);
+  const messaging = firebase.messaging();
+
+  // ฟังก์ชันสำหรับขอ permission เพื่อรับการแจ้งเตือน
+  messaging.requestPermission().then(function() {
+    console.log('Notification permission granted.');
+    return messaging.getToken();
+  }).then(function(token) {
+    console.log('FCM Token:', token);
+    // ส่ง FCM Token ไปยังเซิร์ฟเวอร์หรือ Firebase ของคุณ
+  }).catch(function(err) {
+    console.log('Unable to get permission to notify.', err);
+  });
+
+  // ฟังก์ชันเมื่อแอปได้รับการแจ้งเตือนขณะแอปอยู่ใน foreground
+  messaging.onMessage(function(payload) {
+    console.log('Message received. ', payload);
+    // แสดงการแจ้งเตือนหรือทำการอื่น ๆ ตามที่ต้องการ
+  });
+
+  // ฟังก์ชันเมื่อแอปได้รับการแจ้งเตือนขณะแอปอยู่ใน background
+  messaging.setBackgroundMessageHandler(function(payload) {
+    console.log('Handling background message ', payload);
+    // ทำการแจ้งเตือนหรือดำเนินการอื่น ๆ
+  });
+</script>
+</body>

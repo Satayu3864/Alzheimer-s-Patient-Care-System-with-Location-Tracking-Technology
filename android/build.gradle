@@ -1,0 +1,23 @@
+buildscript {
+    repositories {
+        google()  // สำหรับการดึงข้อมูลจาก Google repository
+        mavenCentral()  // สำหรับการดึงข้อมูลจาก Maven Central
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.1'// หรือเวอร์ชันที่ใช้ในโปรเจกต์ของคุณ
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21'
+        classpath 'io.flutter:flutter_embedding:2.8.0'  // เพิ่มถ้าคุณใช้ Flutter embedding
+        classpath 'com.google.gms:google-services:4.3.15'  // สำหรับ Google services
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

@@ -9,10 +9,8 @@
 #include <ESPmDNS.h>
 #include <ArduinoOTA.h>
 
-#define WIFI_SSID "Miixoji"
-#define WIFI_PASSWORD "14012014"
-//#define WIFI_SSID "Maplee"
-//#define WIFI_PASSWORD "Satayu95559"
+#define WIFI_SSID "Maplee"
+#define WIFI_PASSWORD "Satayu95559"
 #define FIREBASE_HOST "https://testcode-ec713-default-rtdb.firebaseio.com/"
 #define FIREBASE_AUTH "AIzaSyBinULhaoZsGBJ1BRyg3yxm0kUR9b5Y3wA"
 
@@ -122,3 +120,4 @@ void loop() {
 
 
 }
+
